@@ -7,10 +7,18 @@ import { PhoneNumbers } from "./pages/phoneNumbers/PhoneNumbers";
 import { Photos } from "./pages/photos/Photos";
 
 export const pagesConfig: PageTabItem[] = [
+  {
+    label: "Person Details",
+    Component: PersonDetails,
+    displayOrder: 1,
+    children: [
+      { label: "Addresses", Component: Addresses, displayOrder: 1 },
+      { label: "Phone Numbers", Component: PhoneNumbers, displayOrder: 2 },
+    ],
+  },
   { label: "Addresses", Component: Addresses, displayOrder: 2, disabled: true },
   { label: "Phone Numbers", Component: PhoneNumbers, displayOrder: 3 },
   { label: "Pets", Component: Pets, displayOrder: 4 },
   { label: "Hobbies", Component: Hobbies, displayOrder: 5 },
   { label: "Photos", Component: Photos, displayOrder: 6 },
-  { label: "Person Details", Component: PersonDetails, displayOrder: 1 },
 ];
