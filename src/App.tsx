@@ -21,7 +21,13 @@ function App() {
   return (
     <Box>
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-        <Tabs value={value} onChange={handleChange} aria-label="page tabs">
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          aria-label="page tabs"
+          variant="scrollable"
+          allowScrollButtonsMobile
+        >
           <Tab
             label="Person Details"
             id="personDetailsTab"
