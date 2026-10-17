@@ -1,8 +1,10 @@
 import { useState, type ComponentType, type SyntheticEvent } from "react";
 import { Box, MenuItem, Select, Tab, Tabs } from "@mui/material";
 
-type PageTabItem = {
+export type PageTabItem = {
   label: string;
+  displayOrder: number;
+  disabled?: boolean;
   Component: ComponentType;
 };
 
@@ -29,11 +31,13 @@ export function PageTabs({ items }: PageTabsProps) {
             aria-label="page tabs"
             onChange={(event) => setSelectedIndex(Number(event.target.value))}
           >
-            {items.map((item, index) => (
-              <MenuItem key={item.label} value={index}>
-                {item.label}
-              </MenuItem>
-            ))}
+            {items
+              .sort((a, b) => a.displayOrder - b.displayOrder)
+              .map((item, index) => (
+                <MenuItem key={item.label} value={index} disabled={item.disabled}>
+                  {item.label}
+                </MenuItem>
+              ))}
           </Select>
         </Box>
         <Box sx={{ display: { xs: "none", md: "block" } }}>
@@ -44,11 +48,12 @@ export function PageTabs({ items }: PageTabsProps) {
             variant="scrollable"
             allowScrollButtonsMobile
           >
-            {items.map((item, index) => (
+            {items.sort((a, b) => a.displayOrder - b.displayOrder).map((item, index) => (
               <Tab
                 key={item.label}
                 value={index}
                 label={item.label}
+                disabled={item.disabled}
                 id={`page-tab-${index}`}
                 aria-controls={`page-tabpanel-${index}`}
               />
